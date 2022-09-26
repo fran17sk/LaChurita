@@ -23,7 +23,7 @@ const FormularioNuevoPedido = () => {
     const [platoList,setplatoList]= useState([])
     const [bebidaList,setbebidaList]= useState([])
     const [load,setload]= useState(true)
-    const [price,setPrice]= useState()
+    const [precioEmpanadas,setPriceEmpanadas]= useState(Number)
     const [client,setClient]= useState(true)
     const [cliente,setCliente]= useState()
 
@@ -43,8 +43,8 @@ const FormularioNuevoPedido = () => {
                     ...doc.data()
                 }
             })
-            setPrice(price)
-
+            setPriceEmpanadas(price[0].price)
+            console.log(precioEmpanadas)
         })
         .catch(err=>{
             console.log(err)
@@ -56,10 +56,11 @@ const FormularioNuevoPedido = () => {
                 const productos=snapshot.docs.map(doc=>{
                 return {
                     ...doc.data(),
-                    price:price[0].price,
+                    priceEmpanada:precioEmpanadas,
                     cod:doc.id
                 }
             })
+            console.log(productos)
             setempanadasList(productos.filter(product=>product.category==='empanada'))
             setplatoList(productos.filter(product=>product.category==='plato'))
             setbebidaList(productos.filter(product=>product.category==='bebida'))
