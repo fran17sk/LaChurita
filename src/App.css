@@ -1,38 +1,91 @@
 .App {
   text-align: center;
+  background-color: rgb(80, 79, 79);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.centrar{
+  margin:auto;
+  width: 40%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.LinkNavVar{
+  text-decoration: none;
+  font-size: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.LinkVar{
   color: white;
+  margin: 0 50px 0 50px;
+}
+.grupo-envio-domicilio-activo{
+  display: inline;
+}
+.grupo-envio-domicilio-activo{
+  display: none;
+}
+.ItemFlex{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 10px;
+  border: solid 1px rgb(133, 47, 47);
+  padding: 10px;
+  border-radius: 25px 0 25px 0;
+  background-color: rgb(226, 220, 220);
+}
+.ItemFlexTag{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 10px;
+  background-color: #fff;
+  padding: 0;
+  
+}
+.Itemname{
+  font-size: 18px;
+  width: 300px;
+}
+.productosFlex{
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #fff;
+  padding: 30px;
+}
+.ItemTagname{
+  font-size: 22px;
+  font-weight: 900;
+}
+.ItemQuantity{
+  max-width: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+/*CSS FORM NEW PEDIDO*/
+.grupo-cliente{
+  padding: 20px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grupo-cliente-text{
+  margin: 10px;
+  font-weight: 500;
+}
+.mensaje-cliente-oculto{
+  display: none;
+}
+.mensaje-cliente-activo{
+  display: block;
+  font-size: 10px;
+  margin: -8px 0 0 175px;
+}
+.grupo-cliente-input{
+  border-radius: 15px;
+}
+.formulario{
+  margin-top: 20px;
+}
+.formulario-nuevo-pedido{
+  width: 60%;
+  margin: 0 auto 20px auto;
+  border: solid 3px rgb(78, 31, 31);
+  border-radius: 50px;
+  background-color: #fff;
 }
