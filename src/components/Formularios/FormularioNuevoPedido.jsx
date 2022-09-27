@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { db } from "../Firebase"
-import { collection,getDocs,query } from "firebase/firestore"
+import { collection,getDocs,getDoc,query,serverTimestamp} from "firebase/firestore"
 import { useEffect } from "react"
 import { Loader } from "../Loader"
 import {ItemList} from "../ItemList"
@@ -13,7 +13,7 @@ class Pedido {
         this.plato=plato;
         this.bebbida=bebbida;
         this.hora=hora;
-        this.coltotalPriceor=totalPrice;
+        this.totalPrice=totalPrice;
     }
 }
 
@@ -23,32 +23,18 @@ const FormularioNuevoPedido = () => {
     const [platoList,setplatoList]= useState([])
     const [bebidaList,setbebidaList]= useState([])
     const [load,setload]= useState(true)
-    const [precioEmpanadas,setPriceEmpanadas]= useState(Number)
+    const [total,setTotal]= useState([])
+    const nro_pedido = parseInt(window.localStorage.getItem('nro_pedido'))||1;
     const [client,setClient]= useState(true)
     const [cliente,setCliente]= useState()
+    const [faltaCliente,setFatltaCliente] = useState(true)
 
     const ValidationClient=(e)=>{
         setCliente(e.target.value)
-        e.target.value.length>0 ? setClient(false) : setClient(true)
+        e.target.value.length>0 ? setClient(false)&&setCliente(e.target.value) : setClient(true)
     }
     useEffect(()=>{
-        setTimeout(()=>{
-            const productosCollection = collection(db,'ProductosVenta')
-        const precio = collection(db,'precio')
-        const consultaprice = getDocs(precio)
-        consultaprice
-            .then(snapshot=>{
-                const price=snapshot.docs.map(doc=>{
-                return {
-                    ...doc.data()
-                }
-            })
-            setPriceEmpanadas(price[0].price)
-            console.log(precioEmpanadas)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        const productosCollection = collection(db,'ProductosVenta')
         const consulta = getDocs(productosCollection)
         consulta
             .then(snapshot=>{
@@ -56,11 +42,9 @@ const FormularioNuevoPedido = () => {
                 const productos=snapshot.docs.map(doc=>{
                 return {
                     ...doc.data(),
-                    priceEmpanada:precioEmpanadas,
                     cod:doc.id
                 }
             })
-            console.log(productos)
             setempanadasList(productos.filter(product=>product.category==='empanada'))
             setplatoList(productos.filter(product=>product.category==='plato'))
             setbebidaList(productos.filter(product=>product.category==='bebida'))
@@ -68,18 +52,57 @@ const FormularioNuevoPedido = () => {
         .catch(err=>{
             console.log(err)
         })
-        },2000)
+    
         
     },[])
+
+
     
     const GenerarPedido = (e) => {
         e.preventDefault()
+        if (cliente.length > 0) {
+            setFatltaCliente(false)
+            let Empanadas = []
+            let Total_Price = 0
+            let inputs = document.querySelectorAll('.ItemQuantity')
+            inputs.forEach(input => {
+                if(input.value>0){
+                    const Item = {
+                        type: input.id,
+                        quantity: input.value,
+                        category: input.name,
+                        price: input.size,
+                        subtotal: input.value*input.size
+                    }
+                    Empanadas.push(Item)
+                    console.log(Empanadas)
+                }
+            })
+            Empanadas.forEach(item => Total_Price += item.subtotal)
+            setTotal(Total_Price)
+            console.log(nro_pedido,cliente,Empanadas)
+            let pedido = new Pedido(nro_pedido,cliente,Empanadas.filter(prod=>prod.category=='empanada'),Empanadas.filter(prod=>prod.category=='plato'),Empanadas.filter(prod=>prod.category=='bebida'),serverTimestamp(),Total_Price)
+            console.log(pedido)
+            window.localStorage.removeItem('nro_pedido')
+            window.localStorage.setItem('nro_pedido',nro_pedido+1)
+            }
+            else{
+                setFatltaCliente(true)
+            }
+        
+    }
 
-        let pedido = new Pedido()
+    const CancelarPedido = (e) => {
+        document.getElementByClassName('formulario').reset()
+    }
+
+    const total_actual = (e) => {
+        e.preventDefault()
+        console.log('estoyaqui')
     }
 
     return (
-        <form action="formulario-nuevo-pedido" className="formulario">
+        <form className="formulario">
             <div className="formulario-nuevo-pedido">
                 <div className="grupo-cliente">
                     <label className="grupo-cliente-text">NOMBRE DEL CLIENTE: </label>
@@ -123,7 +146,13 @@ const FormularioNuevoPedido = () => {
                 </>
             }
             <div className="OrdenNewGenerate">
+                <button onClick={total_actual}>Calcular Total</button>
+                <output className="total_pedido">{total}</output><br></br>
                 <button type="submit" onClick={GenerarPedido}>GENERAR PEDIDO</button>
+                <button onClick={CancelarPedido}>CANCELAR PEDIDO</button>
+                {
+                    client ? <h2>Falta Ingresar Cliente</h2> : null
+                }
             </div>
         </form>
     )
