@@ -7,7 +7,7 @@ import {ItemList} from "../ItemList"
 import { ToastContainer, toast } from 'react-toastify';
 
 
-const FormularioNuevoPedido = () => {
+const FormularioNuevoPedidoMesa = () => {
     const [value,setValue]= useState(true)
     const [domicilio,setDomicilio]= useState()
     const [referencia,setReferencia]= useState()
@@ -19,11 +19,12 @@ const FormularioNuevoPedido = () => {
     const nro_pedido = parseInt(window.localStorage.getItem('nro_pedido'))||1;
     const [client,setClient]= useState(true)
     const [cliente,setCliente]= useState()
+    const [Mesa,setMesa]= useState()
     const [faltaCliente,setFatltaCliente] = useState(true)
 
-    const ValidationClient=(e)=>{
-        setCliente(e.target.value)
-        e.target.value.length>0 ? setClient(false)&&setCliente(e.target.value) : setClient(true)
+    const ValidationMesa=(e)=>{
+        setMesa(e.target.value)
+        e.target.value.length>0 ? setClient(false)&&setMesa(e.target.value) : setClient(true)
     }
     useEffect(()=>{
         const productosCollection = collection(db,'ProductosVenta')
@@ -75,7 +76,7 @@ const FormularioNuevoPedido = () => {
             console.log(nro_pedido,cliente,Empanadas)
             let pedido = {
                 nro_pedido:nro_pedido,
-                cliente:cliente,
+                mesa:Mesa,
                 Empanadas:Empanadas.filter(prod=>prod.category=='empanada'),
                 Plato:Empanadas.filter(prod=>prod.category=='plato'),
                 Bebida:Empanadas.filter(prod=>prod.category=='bebida'),
@@ -87,7 +88,7 @@ const FormularioNuevoPedido = () => {
             }
 
             console.log(pedido)
-            const pedidosCollection = collection(db,'pedidosLlevar')
+            const pedidosCollection = collection(db,'pedidosLocal')
             const consulta = addDoc(pedidosCollection,pedido)
             consulta
             .then((res)=>{
@@ -137,8 +138,8 @@ const FormularioNuevoPedido = () => {
         <form className="formulario">
             <div className="formulario-nuevo-pedido">
                 <div className="grupo-cliente">
-                    <label className="grupo-cliente-text">NOMBRE DEL CLIENTE: </label>
-                    <input onChange={ValidationClient} className="grupo-cliente-input" type="text" placeholder="Ej: Mateo Cruz"></input>
+                    <label className="grupo-cliente-text">NUMERO DE MESA: </label>
+                    <input onChange={ValidationMesa} className="grupo-cliente-input-moso" type="text" placeholder="Ej: 1"></input>
                     {
                         client
                         ?
@@ -146,11 +147,6 @@ const FormularioNuevoPedido = () => {
                         :
                         <p className="mensaje-cliente-oculto">Este campo no puede quedar vacio!!</p>
                     }
-                </div>
-                <div className="grupo-dropdawn">    
-                    <label className='grupo-cliente-text'>MODALIDAD DE ENTREGA</label><br></br>
-                    <input type="radio" name="op-pedido" value={false} onClick={()=>{setValue(true)}}/>Retiro en el local<br></br>
-                    <input type="radio" name="op-pedido" value={true} onClick={()=>{setValue(false)}}/>Envio a Domicilio
                 </div>
                 {
                     ! value
@@ -194,4 +190,4 @@ const FormularioNuevoPedido = () => {
     )
 }
 
-export {FormularioNuevoPedido}
+export {FormularioNuevoPedidoMesa}

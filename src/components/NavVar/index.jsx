@@ -14,7 +14,7 @@ function NavVar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav>
                     <Nav.Link><span><NavLink to='/seccion_new_pedido'>Nuevo Pedido</NavLink></span></Nav.Link>
-                    <Nav.Link><span><NavLink to='/seccion_new_pedido'>Seccion Mozo</NavLink></span></Nav.Link>
+                    <Nav.Link><span><NavLink to='/seccion_mozo'>Seccion Mozo</NavLink></span></Nav.Link>
                     <Nav.Link><span><NavLink to='/seccion_new_pedido'>Seccion Cocina</NavLink></span></Nav.Link>
                     <Nav.Link><span><NavLink to='/seccion_new_pedido'>Pedidos Del Dia</NavLink></span></Nav.Link>
                 </Nav>

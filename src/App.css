@@ -89,3 +89,56 @@
   border-radius: 50px;
   background-color: #fff;
 }
+
+
+
+.total_pedido{
+  font-size: 24px;
+  font-weight: 900;
+  margin: 2px 2px 2px 2px;
+}
+.TotalFlex{
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 350px;
+  margin: 10px auto;
+  background-color: #fff;
+  border: solid 3px red;
+  border-radius: 50px;
+}
+.buttonForm{
+  background-color: #000;
+  color: #fff;
+  margin : 10px;
+  padding: 5px;
+  border-radius: 20px;
+}
+.faltaCliente{
+  font-size: 22px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  
+}
+
+
+.textfooter{
+  color: #fff;
+  margin: auto;
+}
+
+.PedidoNewMoso{
+  color: #fff;
+  margin: auto;
+  
+}
+
+
+
+
+/*seccion moso*/
+.grupo-cliente-input-moso{
+  width: 50px;
+  border-radius: 15px 0 10px 0;
+}
