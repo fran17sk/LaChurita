@@ -1,8 +1,9 @@
 import { FormularioNuevoPedidoMesa } from "../Formularios/FormularioNuevoPedidoMesa"
 
 const NewPartMoso = () => {
+
     return (
-        <div className="GridAreas">
+        <div className="GridMozo">
             <FormularioNuevoPedidoMesa/>
         </div>
     )

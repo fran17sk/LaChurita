@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { Loader } from "../Loader"
 import {ItemList} from "../ItemList"
 import { ToastContainer, toast } from 'react-toastify';
+import { NavLink} from 'react-router-dom'
 
 
 const FormularioNuevoPedidoMesa = () => {
@@ -16,7 +17,6 @@ const FormularioNuevoPedidoMesa = () => {
     const [bebidaList,setbebidaList]= useState([])
     const [load,setload]= useState(true)
     const [total,setTotal]= useState([])
-    const nro_pedido = parseInt(window.localStorage.getItem('nro_pedido'))||1;
     const [client,setClient]= useState(true)
     const [cliente,setCliente]= useState()
     const [Mesa,setMesa]= useState()
@@ -53,7 +53,7 @@ const FormularioNuevoPedidoMesa = () => {
     
     const GenerarPedido = (e) => {
         e.preventDefault()
-        if (cliente.length > 0) {
+        if (Mesa.length > 0) {
             setFatltaCliente(false)
             let Empanadas = []
             let Total_Price = 0
@@ -73,18 +73,14 @@ const FormularioNuevoPedidoMesa = () => {
             })
             Empanadas.forEach(item => Total_Price += item.subtotal)
             setTotal(Total_Price)
-            console.log(nro_pedido,cliente,Empanadas)
             let pedido = {
-                nro_pedido:nro_pedido,
                 mesa:Mesa,
                 Empanadas:Empanadas.filter(prod=>prod.category=='empanada'),
                 Plato:Empanadas.filter(prod=>prod.category=='plato'),
                 Bebida:Empanadas.filter(prod=>prod.category=='bebida'),
                 hora:serverTimestamp(),
-                envio:value,
-                domicilio:domicilio,
-                referencia:referencia,
                 totalPrice:Total_Price,
+                Preparacion:false
             }
 
             console.log(pedido)
@@ -92,7 +88,7 @@ const FormularioNuevoPedidoMesa = () => {
             const consulta = addDoc(pedidosCollection,pedido)
             consulta
             .then((res)=>{
-                toast.success(`🦄 PEDIDO N° ${nro_pedido} GENERADO CON EXITO`, {
+                toast.success(`🦄 PEDIDO MESA N° ${Mesa} GENERADO CON EXITO`, {
                     position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -104,9 +100,6 @@ const FormularioNuevoPedidoMesa = () => {
                 toast.success(`Orden ${res.id} generada con exito!!!`)
                 CancelarPedido()
             })
-            
-            window.localStorage.removeItem('nro_pedido')
-            window.localStorage.setItem('nro_pedido',nro_pedido+1)
             }
             else{
                 setFatltaCliente(true)
@@ -185,6 +178,7 @@ const FormularioNuevoPedidoMesa = () => {
                 }
                 <br></br>
                 <button onClick={newP} className='buttonForm'>NUEVO PEDIDO</button>
+                <NavLink to='/seccion_mozo'><p className="VolverMesas">VOLVER A MESAS</p></NavLink>
             </div>
         </form>
     )

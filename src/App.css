@@ -142,3 +142,13 @@
   width: 50px;
   border-radius: 15px 0 10px 0;
 }
+.VolverMesas{
+  text-decoration: none;
+  text-decoration-line: none;
+  background-color: #000;
+  border-radius: 20px;
+  color: #fff;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 25px;
+}
