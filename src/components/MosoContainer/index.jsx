@@ -4,11 +4,13 @@ import { useState } from "react"
 import { db } from "../Firebase"
 import { collection,getDocs,getDoc,query,serverTimestamp,addDoc} from "firebase/firestore"
 import { ItemListMesa } from '../ItemListMesa'
+import { Loader } from '../Loader'
 
 
 const MosoContainer = () => {
 
     const [PedidosMesa,setPedidosMesa] = useState([])
+    const [load,setLoad] = useState(true)
 
     useEffect(()=>{
         const productosCollection = collection(db,'pedidosLocal')
@@ -22,6 +24,7 @@ const MosoContainer = () => {
                 }
                 
             })
+            setLoad(false)
             setPedidosMesa(productos)
             console.log(PedidosMesa)
         })
@@ -34,7 +37,9 @@ const MosoContainer = () => {
     return (
         <>
             <NavLink to='/new_pedido_mesa'><p className='PedidoNewMoso'>Nuevo Pedido</p></NavLink>
-            <ItemListMesa pedidos={PedidosMesa}/>
+            {
+                load ? <Loader/> : <ItemListMesa pedidos={PedidosMesa}/>
+            }
         </>
     )
 }

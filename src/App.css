@@ -152,3 +152,20 @@
   margin: auto;
   margin-bottom: 25px;
 }
+
+
+/*CARDS PEDIDOS*/
+.CardsFlex{
+  display: flex;
+  flex-flow: column nowrap;
+}
+.CardPedido{
+  border: solid 1px rgb(114, 114, 114);
+}
+.empanadas_card{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+}
