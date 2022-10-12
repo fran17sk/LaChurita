@@ -169,3 +169,11 @@
   width: 80%;
   margin: auto;
 }
+.CardsFlex{
+  display: flex;
+  flex-flow: row wrap;
+}
+.CardPedido{
+  background-color: #fff;
+  width: 300px;
+}
