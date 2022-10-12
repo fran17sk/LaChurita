@@ -230,3 +230,11 @@
   background-color: rgb(34, 20, 20);
 }
 
+
+
+/*MEDIAS QUERYS*/
+@media (max-width: 658px){
+  .CardPedido{
+    width: 100%;
+  }
+}
