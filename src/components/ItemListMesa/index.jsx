@@ -12,7 +12,7 @@ const ItemListMesa = ({pedidos}) => {
     return (
         <>
             <div className="PedidosFlex">
-                <h2>PEDIDOS</h2>
+                <h2 className="PedidosTitle">PEDIDOS DE MESAS</h2>
             </div>
             <div className="CardsFlex">
                 {pedidos.map(pedido =><ItemMesa pedido={pedido} key={pedido.mesa} />)}

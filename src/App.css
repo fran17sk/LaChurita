@@ -129,15 +129,24 @@
 }
 
 .PedidoNewMoso{
-  color: #fff;
+  color: #000;
+  text-decoration: none;
   margin: auto;
-  
+  padding: 10px;
+  background-color: #fff;
+  width: 200px;
+  font-size: 25px;
+  margin: 10px auto;
+  border-radius: 50px; 
 }
 
 
 
 
 /*seccion moso*/
+.complete{
+  height: 100vh;
+}
 .grupo-cliente-input-moso{
   width: 50px;
   border-radius: 15px 0 10px 0;
@@ -176,4 +185,48 @@
 .CardPedido{
   background-color: #fff;
   width: 300px;
+  border-radius: 20%;
+  margin: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
+.CardPedido h1{
+  font-size: 15px;
+  color: blue;
+  font-weight: 500;
+}
+.CardPedido h2{
+  color: red;
+}
+.CardPedido h3{
+  font-size: 15px;
+  font-weight: 500;
+}
+.empanadas_card{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.pedidoHora{
+  color: rgb(121, 32, 32);
+  position: relative;
+  font-weight: 400;
+  
+}
+
+
+.PedidosTitle{
+  width: 350px;
+  border: #fff solid 1.5px;
+  border-radius: 30px; 
+  font-family: Arial; 
+  font-size: 30px; 
+  COLOR: #ff0000; 
+  text-shadow: 0px 0px 9px #ff0000;
+  padding: 5px;
+  margin: auto;
+  color: #fff;
+  background-color: rgb(34, 20, 20);
+}
+

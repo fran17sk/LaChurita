@@ -35,12 +35,12 @@ const MosoContainer = () => {
 
 
     return (
-        <>
+        <div className='complete'>
             <NavLink to='/new_pedido_mesa'><p className='PedidoNewMoso'>Nuevo Pedido</p></NavLink>
             {
                 load ? <Loader/> : <ItemListMesa pedidos={PedidosMesa}/>
             }
-        </>
+        </div>
     )
 }
 
